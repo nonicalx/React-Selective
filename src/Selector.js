@@ -34,18 +34,28 @@ export default function Selector() {
     }
 
     return (
+        <div>
+            <div className="drop" id="mainInput" style={{ display: 'flex' }} onKeyPress={(e) => { tellCode(e) }}>
+                <ul>
+                    {
+                        data &&
+                        data.map((item, index) => {
+                            return <li key={index}><span className="capsule">{item} <span onClick={() => { handleDelete(item) }} className="fa fa-times-circle"></span></span></li>
+                        })
+                    }
+                    <li style={data.length === 0 ? { width: "100%" } : { width: "auto" }}><input type="text" id='search' className="search" placeholder={"Please search"} onChange={tellCode} autoFocus={true} /></li>
+                </ul>
+            </div>
 
-        <div className="drop" id="mainInput" style={{ display: 'flex' }} onKeyPress={(e) => { tellCode(e) }}>
-            <ul>
-                {
-                    data &&
-                    data.map((item, index) => {
-                        return <li key={index}><span className="capsule">{item} <span onClick={() => { handleDelete(item) }} className="fa fa-times-circle"></span></span></li>
-                    })
-                }
-                <li style={data.length === 0 ? { width: "100%" } : { width: "auto" }}><input type="text" id='search' className="search" placeholder={"Please search"} onChange={tellCode} autoFocus={true} /></li>
-            </ul>
-
+            <div className="dropDown">
+                <ul>
+                    <li>James</li>
+                    <li>Nonso</li>
+                    <li>Arthur</li>
+                    <li>Joshua</li>
+                    <li>Kidmeeno</li>
+                </ul>
+            </div>
         </div>
 
     )
