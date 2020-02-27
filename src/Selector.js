@@ -9,6 +9,7 @@ export default function Selector(props) {
     const tellCode = (e) => {
         var inputValue = document.querySelector('#search');
         if (inputValue.value === '') {
+            setShow(false)
             if ($.event.inputType === "deleteContentBackward") {
                 if (data.length !== 0) {
                     inputValue.value = data[data.length - 1]
@@ -21,6 +22,7 @@ export default function Selector(props) {
             }
         }
 
+
         if ($.event.keyCode === 13) {
             if (e.target.value.trim() !== "") {
                 setData([...data, e.target.value])
@@ -29,6 +31,7 @@ export default function Selector(props) {
         }
 
         if (e.target.value.trim() !== "") {
+            props.setValue(inputValue.value)
             setShow(true)
         } else {
             setShow(false)
@@ -62,12 +65,7 @@ export default function Selector(props) {
             </div>
             {show ? <div className="dropDown">
                 <ul>
-                    {props.data && props.data.map((item, index) => (<li onClick={handleSelect} key={index}>{item.name}</li>))}
-
-                    {/* <li>Nonso</li>
-                    <li>Arthur</li>
-                    <li>Joshua</li>
-                    <li>Kidmeeno</li> */}
+                    {props.result && props.result.map((item, index) => (<li onClick={handleSelect} key={index}>{item.name}</li>))}
                 </ul>
             </div> : <></>}
 

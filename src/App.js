@@ -1,17 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Selector from './Selector'
 function App() {
-
-  const data = [
+  var [searchValue, setSearchValue] = useState('')
+  const result = [
     { name: "Arthur", nickname: "kidmeeno" },
     { name: "Joshua", nickname: "Josh Sherran" },
-    { name: "Joshua", nickname: "Josh Sherran" }
+    { name: "Nonso", nickname: "nonicalx" }
   ]
+
+  console.log("search value", searchValue)
 
   return (
     <div>
-      <Selector data={data} />
+      <Selector result={result} setValue={setSearchValue} />
     </div>
   );
 }
