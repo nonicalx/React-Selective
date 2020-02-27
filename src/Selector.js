@@ -3,7 +3,8 @@ import React, { useState } from 'react'
 export default function Selector(props) {
     let $ = window;
     const [data, setData] = useState([]);
-    const [show, setShow] = useState(false)
+    const [show, setShow] = useState(false);
+    var [dataFromParent, setDataFromParent] = useState([])
 
     const tellCode = (e) => {
         var inputValue = document.querySelector('#search');
@@ -41,6 +42,11 @@ export default function Selector(props) {
         setData(data.filter((item) => item !== value))
     }
 
+    const handleSelect = (e) => {
+        setData([...data, e.target.innerText])
+        document.querySelector('#search').value = " "
+    }
+
     return (
         <div>
             <div className="drop" id="mainInput" style={{ display: 'flex' }} onKeyPress={(e) => { tellCode(e) }}>
@@ -56,11 +62,12 @@ export default function Selector(props) {
             </div>
             {show ? <div className="dropDown">
                 <ul>
-                    <li>James</li>
-                    <li>Nonso</li>
+                    {props.data && props.data.map((item, index) => (<li onClick={handleSelect} key={index}>{item.name}</li>))}
+
+                    {/* <li>Nonso</li>
                     <li>Arthur</li>
                     <li>Joshua</li>
-                    <li>Kidmeeno</li>
+                    <li>Kidmeeno</li> */}
                 </ul>
             </div> : <></>}
 
