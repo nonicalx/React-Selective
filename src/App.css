@@ -48,6 +48,7 @@
   box-shadow: 1px 1px 2px 2px lightgray;
   border-radius: 8px;
   margin: 0 2rem 2px 2rem;
+  animation: popIn 0.3s linear;
 }
 
 .dropDown ul {
@@ -70,4 +71,13 @@
 
 .dropDown li:hover {
   box-shadow: 1px 1px 2px 2px lightgray;
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 
-export default function Selector() {
+export default function Selector(props) {
     let $ = window;
     const [data, setData] = useState([]);
-
+    const [show, setShow] = useState(false)
 
     const tellCode = (e) => {
         var inputValue = document.querySelector('#search');
@@ -26,6 +26,14 @@ export default function Selector() {
                 inputValue.value = " ";
             }
         }
+
+        if (e.target.value.trim() !== "") {
+            setShow(true)
+        } else {
+            setShow(false)
+        }
+        console.log("input", e.target.value)
+        console.log("show", show)
     }
 
 
@@ -46,8 +54,7 @@ export default function Selector() {
                     <li style={data.length === 0 ? { width: "100%" } : { width: "auto" }}><input type="text" id='search' className="search" placeholder={"Please search"} onChange={tellCode} autoFocus={true} /></li>
                 </ul>
             </div>
-
-            <div className="dropDown">
+            {show ? <div className="dropDown">
                 <ul>
                     <li>James</li>
                     <li>Nonso</li>
@@ -55,7 +62,8 @@ export default function Selector() {
                     <li>Joshua</li>
                     <li>Kidmeeno</li>
                 </ul>
-            </div>
+            </div> : <></>}
+
         </div>
 
     )
