@@ -1,10 +1,15 @@
 import React, { useState } from 'react'
 
 export default function Selector(props) {
+    var { dropClass, dropStyle, tagClass, tagStyle, searchClass, searchStyle, result, isSearchable } = props
     let $ = window;
     const [data, setData] = useState([]);
     const [show, setShow] = useState(false);
-    var [dataFromParent, setDataFromParent] = useState([])
+
+    var searchable = isSearchable ? isSearchable : false
+    // useEffect(() => {
+    //     setSearchable(props.isSearchable)
+    // }, [])
 
     const tellCode = (e) => {
         var inputValue = document.querySelector('#search');
@@ -57,17 +62,22 @@ export default function Selector(props) {
                     {
                         data &&
                         data.map((item, index) => {
-                            return <li key={index}><span className="capsule">{item} <span onClick={() => { handleDelete(item) }} className="fa fa-times-circle"></span></span></li>
+                            return <li key={index} style={{ ...tagStyle }}><span className={tagClass ? tagClass : "capsule"}>{item} <span onClick={() => { handleDelete(item) }} className="fa fa-times-circle"></span></span></li>
                         })
                     }
-                    <li style={data.length === 0 ? { width: "100%" } : { width: "auto" }}><input type="text" id='search' className="search" placeholder={"Please search"} onChange={tellCode} autoFocus={true} /></li>
+                    <li style={data.length === 0 ? { width: "100%" } : { width: "auto" }}><input type="text" id='search' style={{ ...searchStyle }} className={searchClass ? searchClass : "search"} placeholder={"Please search"} onChange={tellCode} autoFocus={true} /></li>
                 </ul>
             </div>
-            {show ? <div className="dropDown">
-                <ul>
-                    {props.result && props.result.map((item, index) => (<li onClick={handleSelect} key={index}>{item.name}</li>))}
-                </ul>
-            </div> : <></>}
+            {
+                searchable ?
+                    show ? <div className={dropClass ? dropClass : "dropDown"} style={{ ...dropStyle }}>
+                        <ul>
+                            {result && result.map((item, index) => (<li onClick={handleSelect} key={index}>{item.name}</li>))}
+                        </ul>
+                    </div> : <></>
+                    : <></>
+            }
+
 
         </div>
 

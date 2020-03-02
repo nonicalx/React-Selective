@@ -13,7 +13,7 @@ function App() {
 
   return (
     <div>
-      <Selector result={result} setValue={setSearchValue} />
+      <Selector result={result} setValue={setSearchValue} isSearchable={true} />
     </div>
   );
 }
